@@ -42,7 +42,7 @@
   }
 
   function handleKeydown(event) {
-    if (event.key === 'Escape') {
+    if (interacting && event.key === 'Escape') {
       disableInteraction();
     }
   }
