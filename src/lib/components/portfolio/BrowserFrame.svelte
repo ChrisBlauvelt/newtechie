@@ -6,16 +6,46 @@
   export let title;
   export let description;
   export let tags = [];
+  export let scale = 0.3;
 
   let iframeLoaded = false;
   let interacting = false;
   let visible = true;
   let containerEl;
+  let smallScreen = false;
 
   // Extract display hostname from URL
   $: displayUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
   onMount(() => {
+    // Detect small screens for mobile tap-to-visit fallback
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mql = window.matchMedia('(max-width: 639px)');
+      smallScreen = mql.matches;
+      const handler = (e) => { smallScreen = e.matches; };
+      mql.addEventListener('change', handler);
+      // Clean up listener on destroy
+      const cleanupMedia = () => mql.removeEventListener('change', handler);
+
+      // Use IntersectionObserver for lazy loading when available
+      if (typeof IntersectionObserver !== 'undefined') {
+        visible = false;
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) {
+              visible = true;
+              observer.disconnect();
+            }
+          },
+          { rootMargin: '200px' }
+        );
+        observer.observe(containerEl);
+        return () => { observer.disconnect(); cleanupMedia(); };
+      }
+
+      return cleanupMedia;
+    }
+
     // Use IntersectionObserver for lazy loading when available
     if (typeof IntersectionObserver !== 'undefined') {
       visible = false;
@@ -76,7 +106,7 @@
   </div>
 
   <!-- Iframe Container -->
-  <div class="relative overflow-hidden bg-white flex-1" style="min-height: 220px;">
+  <div class="relative overflow-hidden bg-white flex-1" style="height: {800 * scale}px;">
     {#if visible}
       {#if !iframeLoaded}
         <div class="absolute inset-0 flex items-center justify-center bg-gray-100">
@@ -87,18 +117,24 @@
         src={url}
         title={title}
         class="absolute top-0 left-0 border-0"
-        style="width: 1280px; height: 800px; transform: scale(var(--iframe-scale, 0.3)); transform-origin: top left; pointer-events: {interacting ? 'auto' : 'none'};"
+        style="width: 1280px; height: 800px; transform: scale({scale}); transform-origin: top left; pointer-events: {interacting ? 'auto' : 'none'};"
         loading="lazy"
         on:load={() => { iframeLoaded = true; }}
       ></iframe>
       {#if !interacting}
         <button
           class="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors cursor-pointer flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 z-10"
-          on:click={enableInteraction}
-          aria-label="Click to interact with {title}"
+          on:click={() => {
+            if (smallScreen) {
+              window.open(url, '_blank');
+            } else {
+              enableInteraction();
+            }
+          }}
+          aria-label={smallScreen ? `Visit ${title}` : `Click to interact with ${title}`}
         >
           <span class="bg-black/60 text-white text-sm px-4 py-2 rounded-full backdrop-blur-sm">
-            Click to interact
+            {smallScreen ? 'Tap to visit' : 'Click to interact'}
           </span>
         </button>
       {/if}

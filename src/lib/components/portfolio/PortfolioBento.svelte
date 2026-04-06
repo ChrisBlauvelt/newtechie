@@ -47,19 +47,19 @@
 <!-- Bento Grid -->
 <div class="bento-grid max-w-6xl mx-auto gap-4">
   <!-- Featured: Bagel Boys (large left) -->
-  <div class="bento-featured" style="--iframe-scale: 0.35;">
-    <BrowserFrame {...sites[0]} />
+  <div class="bento-featured">
+    <BrowserFrame {...sites[0]} scale={0.35} />
   </div>
 
   <!-- Right column: 3 stacked -->
-  <div class="bento-top-right" style="--iframe-scale: 0.25;">
-    <BrowserFrame {...sites[1]} />
+  <div class="bento-top-right">
+    <BrowserFrame {...sites[1]} scale={0.25} />
   </div>
-  <div class="bento-mid-right" style="--iframe-scale: 0.25;">
-    <BrowserFrame {...sites[2]} />
+  <div class="bento-mid-right">
+    <BrowserFrame {...sites[2]} scale={0.25} />
   </div>
-  <div class="bento-bot-right" style="--iframe-scale: 0.25;">
-    <BrowserFrame {...sites[3]} />
+  <div class="bento-bot-right">
+    <BrowserFrame {...sites[3]} scale={0.25} />
   </div>
 </div>
 
