@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://techieneighbor.net/sitemap.xml
+
+# Disallow specific paths if needed in the future
+# Disallow: /private/
+# Disallow: /admin/ 
