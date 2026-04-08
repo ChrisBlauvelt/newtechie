@@ -8,26 +8,36 @@
       title: 'Bagel Boys Cafe',
       description: 'A high-performance modern website for a beloved local bagel shop, featuring a dynamic menu and blazingly fast load times.',
       tags: ['Svelte', 'SvelteKit', 'Blob Storage'],
+      fallbackImage: '/portfolio/bagelboyscafe.webp',
+      videoWebm: '/portfolio/bagelboyscafe.webm',
     },
     {
       url: 'https://ricosworldkitchen.com',
       title: "Rico's World Kitchen",
       description: 'A modern, responsive website showcasing their menu, location, and story.',
       tags: ['React', 'Tailwind CSS', 'SEO'],
+      fallbackImage: '/portfolio/ricos-world-kitchen.webp',
     },
     {
       url: 'https://thebrunchapothecary.com',
       title: 'Brunch Apothecary',
       description: 'An elegant website featuring online ordering and beautiful imagery.',
       tags: ['Next.js', 'React', 'Responsive'],
+      fallbackImage: '/portfolio/brunch-apothecary.webp',
+      videoWebm: '/portfolio/brunch-apothecary.webm',
     },
     {
       url: 'https://theartisanagatheringplace.com',
       title: 'The Artisan: A Gathering Place',
       description: 'A dynamic event website with ticket sales, vendor information, and interactive features.',
       tags: ['Svelte', 'Klaviyo Marketing', 'Interactive'],
+      fallbackImage: '/portfolio/artisan-gathering.webp',
+      videoWebm: '/portfolio/artisan-gathering.webm',
     },
   ];
+
+  let selectedIndex = 0;
+  $: selected = sites[selectedIndex];
 </script>
 
 <div class="flex flex-col items-center justify-center space-y-4 text-center mb-12">
@@ -35,7 +45,7 @@
     <div class="inline-block rounded-lg bg-teal-100 px-3 py-1 text-sm text-teal-700">
       Our Work
     </div>
-    <h2 class="text-2xl md:text-3xl lg:text-5xl font-bold tracking-tighter glow-text">
+    <h2 class="text-2xl md:text-3xl lg:text-5xl font-bold tracking-tighter text-white drop-shadow-[0_0_10px_rgba(20,184,166,0.8)]">
       Portfolio of Local Business Websites
     </h2>
     <p class="max-w-[900px] text-gray-500 text-sm md:text-base lg:text-xl">
@@ -44,59 +54,62 @@
   </div>
 </div>
 
-<!-- Bento Grid -->
-<div class="bento-grid max-w-6xl mx-auto gap-4">
-  <!-- Featured: Bagel Boys (large left) -->
-  <div class="bento-featured">
-    <BrowserFrame {...sites[0]} scale={0.35} />
+<!-- Portfolio Layout: Site List + Preview -->
+<div class="portfolio-layout max-w-6xl mx-auto gap-4">
+  <!-- Site List -->
+  <div class="site-list flex flex-col gap-2">
+    {#each sites as site, i}
+      <button
+        class="site-item text-left p-4 rounded-lg transition-all duration-200 {selectedIndex === i
+          ? 'bg-gray-800 border border-teal-500/50 shadow-lg shadow-teal-500/10'
+          : 'bg-gray-900/50 border border-gray-800 hover:bg-gray-800/70 hover:border-gray-700'}"
+        on:click={() => { selectedIndex = i; }}
+      >
+        <h3 class="font-semibold text-sm md:text-base transition-colors {selectedIndex === i ? 'text-teal-400' : 'text-white'}">
+          {site.title}
+        </h3>
+        <p class="text-gray-400 text-xs md:text-sm mt-1 line-clamp-2">{site.description}</p>
+        <div class="flex flex-wrap gap-1 mt-2">
+          {#each site.tags as tag}
+            <span class="px-1.5 py-0.5 bg-teal-900/50 text-teal-300 text-[10px] md:text-xs rounded">
+              {tag}
+            </span>
+          {/each}
+        </div>
+      </button>
+    {/each}
   </div>
 
-  <!-- Right column: 3 stacked -->
-  <div class="bento-top-right">
-    <BrowserFrame {...sites[1]} scale={0.25} />
-  </div>
-  <div class="bento-mid-right">
-    <BrowserFrame {...sites[2]} scale={0.25} />
-  </div>
-  <div class="bento-bot-right">
-    <BrowserFrame {...sites[3]} scale={0.25} />
+  <!-- Preview -->
+  <div class="site-preview">
+    {#key selected.url}
+      <BrowserFrame {...selected} />
+    {/key}
   </div>
 </div>
 
 <style>
-  .bento-grid {
+  .portfolio-layout {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas:
-      "featured top-right"
-      "featured mid-right"
-      "featured bot-right";
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: "list preview";
   }
 
-  .bento-featured {
-    grid-area: featured;
-  }
-  .bento-top-right {
-    grid-area: top-right;
-  }
-  .bento-mid-right {
-    grid-area: mid-right;
-  }
-  .bento-bot-right {
-    grid-area: bot-right;
+  .site-list {
+    grid-area: list;
   }
 
-  /* Mobile: single column */
+  .site-preview {
+    grid-area: preview;
+  }
+
+  /* Mobile: stack with list below */
   @media (max-width: 767px) {
-    .bento-grid {
+    .portfolio-layout {
       grid-template-columns: 1fr;
-      grid-template-rows: auto;
       grid-template-areas:
-        "featured"
-        "top-right"
-        "mid-right"
-        "bot-right";
+        "preview"
+        "list";
     }
   }
 </style>
