@@ -14,6 +14,7 @@ const sites = [
     url: 'https://bagelboyscafe.com',
     filename: 'bagelboyscafe.webm',
     type: 'video',
+    duration: 10000,
   },
   {
     url: 'https://ricosworldkitchen.com',
@@ -24,6 +25,7 @@ const sites = [
     url: 'https://thebrunchapothecary.com',
     filename: 'brunch-apothecary.webm',
     type: 'video',
+    duration: 10000,
   },
   {
     url: 'https://theartisanagatheringplace.com',
@@ -40,9 +42,9 @@ async function captureVideo(browser, site) {
   });
   const page = await context.newPage();
 
-  await page.goto(site.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  // Let hero animations play for 5 seconds
-  await page.waitForTimeout(5000);
+  await page.goto(site.url, { waitUntil: 'networkidle', timeout: 60000 });
+  // Let hero animations play
+  await page.waitForTimeout(site.duration || 5000);
 
   await context.close(); // Finalizes the video file
 

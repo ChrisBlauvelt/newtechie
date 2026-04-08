@@ -5,9 +5,10 @@ import PortfolioBento from './PortfolioBento.svelte';
 describe('PortfolioBento', () => {
   it('renders all four portfolio sites', () => {
     render(PortfolioBento);
+    // Each site appears in the site list; the selected one also appears in the BrowserFrame preview
+    expect(screen.getAllByText('Brunch Apothecary').length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('Bagel Boys Cafe')).toBeInTheDocument();
     expect(screen.getByText("Rico's World Kitchen")).toBeInTheDocument();
-    expect(screen.getByText('Brunch Apothecary')).toBeInTheDocument();
     expect(screen.getByText('The Artisan: A Gathering Place')).toBeInTheDocument();
   });
 

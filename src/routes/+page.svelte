@@ -601,14 +601,6 @@
               link: "Home Improvement",
             })}>Home Improvement</a
         >
-        <a
-          href="#contact"
-          class="nav-link text-sm font-medium hover:text-teal-600 transition-colors"
-          aria-label="Contact Us"
-          on:click={() =>
-            track("Navigation Click", { page: "Home", link: "Contact" })}
-          >Contact</a
-        >
       </nav>
 
       <!-- Mobile menu button - shows on mobile OR when navbar is collapsed -->
@@ -725,19 +717,6 @@
             class="mobile-nav-link text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors"
             aria-label="Home Improvement">Home Improvement</a
           >
-          <a
-            href="#contact"
-            on:click={() => {
-              closeMenu();
-              track("Mobile Navigation Click", {
-                page: "Home",
-                link: "Contact",
-              });
-            }}
-            class="mobile-nav-link text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors"
-            aria-label="Contact Us">Contact</a
-          >
-
           <!-- Mobile Get in Touch button -->
           <button
             class="get-in-touch-btn bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors w-full text-center"
@@ -2143,11 +2122,18 @@
                 <svg
                   class="w-4 h-4 text-teal-400"
                   fill="currentColor"
-                  viewBox="0 0 20 20"
+                  viewBox="0 0 24 24"
                 >
+                  <!-- Cookie outline with bite -->
                   <path
-                    d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 12a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z"
+                    d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10c0-.34-.02-.675-.05-1.005a3.5 3.5 0 01-3.45-2.495 3.5 3.5 0 01-2.5-3.5 3.5 3.5 0 01-3.5-2.5A3.5 3.5 0 0112 2z"
                   />
+                  <!-- Chocolate chips -->
+                  <circle cx="8.5" cy="14.5" r="1.2" fill="#1a1a2e" />
+                  <circle cx="12" cy="11" r="1" fill="#1a1a2e" />
+                  <circle cx="7" cy="9.5" r="0.9" fill="#1a1a2e" />
+                  <circle cx="11" cy="15.5" r="0.8" fill="#1a1a2e" />
+                  <circle cx="15" cy="14" r="1.1" fill="#1a1a2e" />
                 </svg>
                 <span>We use cookies to enhance your experience</span>
                 <button

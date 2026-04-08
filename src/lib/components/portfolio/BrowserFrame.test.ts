@@ -2,9 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import BrowserFrame from './BrowserFrame.svelte';
 
-// With visible defaulting to true and IntersectionObserver undefined in jsdom,
-// the component renders content immediately without needing the observer.
-
 describe('BrowserFrame', () => {
   const defaultProps = {
     url: 'https://bagelboyscafe.com',
@@ -30,15 +27,19 @@ describe('BrowserFrame', () => {
     expect(screen.getByText('SvelteKit')).toBeInTheDocument();
   });
 
-  it('shows interaction overlay by default', () => {
+  it('has links to open the site in a new tab', () => {
     render(BrowserFrame, { props: defaultProps });
-    expect(screen.getByText('Click to interact')).toBeInTheDocument();
+    const links = screen.getAllByRole('link', { name: /visit/i });
+    expect(links.length).toBeGreaterThanOrEqual(1);
+    expect(links[0]).toHaveAttribute('href', 'https://bagelboyscafe.com');
+    expect(links[0]).toHaveAttribute('target', '_blank');
   });
 
-  it('has a link to open the site in a new tab', () => {
-    render(BrowserFrame, { props: defaultProps });
-    const link = screen.getByRole('link', { name: /visit/i });
-    expect(link).toHaveAttribute('href', 'https://bagelboyscafe.com');
-    expect(link).toHaveAttribute('target', '_blank');
+  it('shows fallback image when no video provided', () => {
+    render(BrowserFrame, {
+      props: { ...defaultProps, fallbackImage: '/portfolio/bagelboyscafe.webp' },
+    });
+    const img = screen.getByAltText('Bagel Boys Cafe preview');
+    expect(img).toHaveAttribute('src', '/portfolio/bagelboyscafe.webp');
   });
 });
