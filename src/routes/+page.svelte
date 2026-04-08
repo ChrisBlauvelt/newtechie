@@ -6,6 +6,7 @@
   import AISpotlightHero from "$lib/components/ai-spotlight/AISpotlightHero.svelte";
   import FAQ from "$lib/components/FAQ.svelte";
   import DynamicServiceDemo from "$lib/components/DynamicServiceDemo.svelte";
+  import PortfolioBento from "$lib/components/portfolio/PortfolioBento.svelte";
 
   // Function to track link clicks
   function trackLinkClick(platform, url, location) {
@@ -40,9 +41,6 @@
 
   // Image loading states
   let imageLoadingStates = {
-    rico: true,
-    brunch: true,
-    artisan: true,
     profile: true,
   };
 
@@ -603,14 +601,6 @@
               link: "Home Improvement",
             })}>Home Improvement</a
         >
-        <a
-          href="#contact"
-          class="nav-link text-sm font-medium hover:text-teal-600 transition-colors"
-          aria-label="Contact Us"
-          on:click={() =>
-            track("Navigation Click", { page: "Home", link: "Contact" })}
-          >Contact</a
-        >
       </nav>
 
       <!-- Mobile menu button - shows on mobile OR when navbar is collapsed -->
@@ -727,19 +717,6 @@
             class="mobile-nav-link text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors"
             aria-label="Home Improvement">Home Improvement</a
           >
-          <a
-            href="#contact"
-            on:click={() => {
-              closeMenu();
-              track("Mobile Navigation Click", {
-                page: "Home",
-                link: "Contact",
-              });
-            }}
-            class="mobile-nav-link text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors"
-            aria-label="Contact Us">Contact</a
-          >
-
           <!-- Mobile Get in Touch button -->
           <button
             class="get-in-touch-btn bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors w-full text-center"
@@ -1729,257 +1706,8 @@
     <section id="portfolio" class="w-full py-8 md:py-12 lg:py-24">
       <div class="container px-4 md:px-6 mx-auto">
         {#if visibleSections.portfolio}
-          <div
-            class="flex flex-col items-center justify-center space-y-4 text-center mb-12"
-            in:fadeIn
-          >
-            <div class="space-y-2">
-              <div
-                class="inline-block rounded-lg bg-teal-100 px-3 py-1 text-sm text-teal-700"
-              >
-                Recent Work
-              </div>
-              <h2
-                class="text-2xl md:text-3xl lg:text-5xl font-bold tracking-tighter glow-text text-white drop-shadow-[0_0_10px_rgba(20,184,166,0.8)]"
-              >
-                Portfolio of Local Business Websites
-              </h2>
-              <p
-                class="max-w-[900px] text-gray-500 text-sm md:text-base lg:text-xl"
-              >
-                Explore some of the custom websites I've created for businesses
-                in Gwinnett County and Metro Atlanta.
-              </p>
-            </div>
-          </div>
-          <div
-            class="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 justify-items-center"
-          >
-            <!-- Bagel Boys Cafe -->
-            <a
-              href="https://bagelboyscafe.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 block"
-            >
-              <div class="relative">
-                <img
-                  src="/portfolio/bagelboyscafe.webp"
-                  alt="Bagel Boys Cafe - Custom Business Website"
-                  width="400"
-                  height="300"
-                  class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  on:error={(e) => handleImageError(e, "bagel")}
-                  on:load={() => handleImageLoad("bagel")}
-                />
-                <div
-                  class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <div class="text-center text-white">
-                    <h3 class="text-xl font-semibold mb-2">Bagel Boys Cafe</h3>
-                    <p class="text-sm">Restaurant Website</p>
-                  </div>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3
-                  class="text-xl font-semibold mb-2 group-hover:text-teal-400 transition-colors text-white drop-shadow-[0_0_10px_rgba(20,184,166,0.8)] glow-text"
-                >
-                  Bagel Boys Cafe
-                </h3>
-                <p
-                  class="text-gray-200 text-sm mb-4 drop-shadow-[0_0_8px_rgba(20,184,166,0.5)]"
-                >
-                  A high-performance modern website for a beloved local bagel
-                  shop, featuring a dynamic menu and blazingly fast load times.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Svelte</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >SvelteKit</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Blob Storage</span
-                  >
-                </div>
-              </div>
-            </a>
-
-            <!-- Rico's World Kitchen -->
-            <a
-              href="https://ricosworldkitchen.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 block"
-            >
-              <div class="relative">
-                <img
-                  src="/portfolio/ricos-world-kitchen.webp"
-                  alt="Rico's World Kitchen - Custom Restaurant Website"
-                  width="400"
-                  height="300"
-                  class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  on:error={(e) => handleImageError(e, "rico")}
-                  on:load={() => handleImageLoad("rico")}
-                />
-                <div
-                  class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <div class="text-center text-white">
-                    <h3 class="text-xl font-semibold mb-2">
-                      Rico's World Kitchen
-                    </h3>
-                    <p class="text-sm">Restaurant Website</p>
-                  </div>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3
-                  class="text-xl font-semibold mb-2 group-hover:text-teal-400 transition-colors text-white drop-shadow-[0_0_10px_rgba(20,184,166,0.8)] glow-text"
-                >
-                  Rico's World Kitchen
-                </h3>
-                <p
-                  class="text-gray-200 text-sm mb-4 drop-shadow-[0_0_8px_rgba(20,184,166,0.5)]"
-                >
-                  A modern, responsive website for a local restaurant showcasing
-                  their menu, location, and story.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >React</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Tailwind CSS</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >SEO</span
-                  >
-                </div>
-              </div>
-            </a>
-
-            <!-- Brunch Apothecary -->
-            <a
-              href="https://thebrunchapothecary.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 block"
-            >
-              <div class="relative">
-                <img
-                  src="/portfolio/brunch-apothecary.webp"
-                  alt="Brunch Apothecary - Custom Restaurant Website"
-                  width="400"
-                  height="300"
-                  class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  on:error={(e) => handleImageError(e, "brunch")}
-                  on:load={() => handleImageLoad("brunch")}
-                />
-                <div
-                  class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <div class="text-center text-white">
-                    <h3 class="text-xl font-semibold mb-2">
-                      Brunch Apothecary
-                    </h3>
-                    <p class="text-sm">Restaurant Website</p>
-                  </div>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3
-                  class="text-xl font-semibold mb-2 group-hover:text-teal-400 transition-colors text-white drop-shadow-[0_0_10px_rgba(20,184,166,0.8)] glow-text"
-                >
-                  Brunch Apothecary
-                </h3>
-                <p
-                  class="text-gray-200 text-sm mb-4 drop-shadow-[0_0_8px_rgba(20,184,166,0.5)]"
-                >
-                  An elegant website for a brunch restaurant featuring online
-                  ordering and beautiful imagery.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Next.js</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >React</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Responsive</span
-                  >
-                </div>
-              </div>
-            </a>
-
-            <!-- Artisan Gathering -->
-            <a
-              href="https://theartisanagatheringplace.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 block"
-            >
-              <div class="relative">
-                <img
-                  src="/portfolio/artisan-gathering.webp"
-                  alt="The Artisan: A Gathering Place - Custom Event Website"
-                  width="400"
-                  height="300"
-                  class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  on:error={(e) => handleImageError(e, "artisan")}
-                  on:load={() => handleImageLoad("artisan")}
-                />
-                <div
-                  class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <div class="text-center text-white">
-                    <h3 class="text-xl font-semibold mb-2">
-                      The Artisan: A Gathering Place
-                    </h3>
-                    <p class="text-sm">Event Website</p>
-                  </div>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3
-                  class="text-xl font-semibold mb-2 group-hover:text-teal-400 transition-colors text-white drop-shadow-[0_0_10px_rgba(20,184,166,0.8)] glow-text"
-                >
-                  The Artisan: A Gathering Place
-                </h3>
-                <p
-                  class="text-gray-200 text-sm mb-4 drop-shadow-[0_0_8px_rgba(20,184,166,0.5)]"
-                >
-                  A dynamic event website with ticket sales, vendor information,
-                  and interactive features.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Svelte</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Klaviyo Marketing</span
-                  >
-                  <span
-                    class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded"
-                    >Interactive</span
-                  >
-                </div>
-              </div>
-            </a>
+          <div in:fadeIn>
+            <PortfolioBento />
           </div>
         {/if}
       </div>
@@ -2394,11 +2122,18 @@
                 <svg
                   class="w-4 h-4 text-teal-400"
                   fill="currentColor"
-                  viewBox="0 0 20 20"
+                  viewBox="0 0 24 24"
                 >
+                  <!-- Cookie outline with bite -->
                   <path
-                    d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 12a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z"
+                    d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10c0-.34-.02-.675-.05-1.005a3.5 3.5 0 01-3.45-2.495 3.5 3.5 0 01-2.5-3.5 3.5 3.5 0 01-3.5-2.5A3.5 3.5 0 0112 2z"
                   />
+                  <!-- Chocolate chips -->
+                  <circle cx="8.5" cy="14.5" r="1.2" fill="#1a1a2e" />
+                  <circle cx="12" cy="11" r="1" fill="#1a1a2e" />
+                  <circle cx="7" cy="9.5" r="0.9" fill="#1a1a2e" />
+                  <circle cx="11" cy="15.5" r="0.8" fill="#1a1a2e" />
+                  <circle cx="15" cy="14" r="1.1" fill="#1a1a2e" />
                 </svg>
                 <span>We use cookies to enhance your experience</span>
                 <button
