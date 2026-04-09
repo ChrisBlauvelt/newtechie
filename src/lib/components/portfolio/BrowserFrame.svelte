@@ -8,8 +8,27 @@
   export let video = '';
   export let videoWebm = '';
 
+  let videoFailed = false;
+  let videoEl;
+
+  function handleVideoError() {
+    videoFailed = true;
+  }
+
+  function handleVideoMount(node) {
+    videoEl = node;
+    const playPromise = node.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        videoFailed = true;
+      });
+    }
+  }
+
   // Extract display hostname from URL
   $: displayUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  // Reset videoFailed when the site changes
+  $: url, videoFailed = false;
 </script>
 
 <div
@@ -44,22 +63,22 @@
     class="relative overflow-hidden bg-gray-900 flex-1 block cursor-pointer"
     aria-label="Visit {title}"
   >
-    {#if video || videoWebm}
+    {#if (video || videoWebm) && !videoFailed}
       <video
-        autoplay
+        use:handleVideoMount
         loop
         muted
         playsinline
         poster={fallbackImage}
+        on:error={handleVideoError}
         class="w-full h-full object-cover object-top"
       >
         {#if videoWebm}
-          <source src={videoWebm} type="video/webm" />
+          <source src={videoWebm} type="video/webm" on:error={handleVideoError} />
         {/if}
         {#if video}
-          <source src={video} type="video/mp4" />
+          <source src={video} type="video/mp4" on:error={handleVideoError} />
         {/if}
-        <!-- Fallback for browsers that don't support video -->
         {#if fallbackImage}
           <img
             src={fallbackImage}

@@ -1440,7 +1440,7 @@
           >
             <!-- Left Side: Profile & Overview -->
             <div
-              class="space-y-6 text-center lg:text-left bg-gradient-to-br from-teal-900/40 to-slate-900/50 p-8 rounded-2xl border border-teal-500/20 shadow-[0_0_30px_rgba(20,184,166,0.15)] relative overflow-hidden group"
+              class="space-y-6 text-center lg:text-left bg-gradient-to-br from-teal-900/90 to-slate-900/95 md:from-teal-900/40 md:to-slate-900/50 p-8 rounded-2xl border border-teal-500/20 shadow-[0_0_30px_rgba(20,184,166,0.15)] relative overflow-hidden group"
             >
               <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               
@@ -1484,8 +1484,8 @@
                     <polyline points="8 6 2 12 8 18"></polyline>
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-teal-300 transition-colors">Custom Apps & Data</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-white mb-2 group-hover:text-teal-300 transition-colors">Custom Apps & Data</h3>
+                <p class="text-sm text-gray-600 md:text-gray-400 leading-relaxed">
                   Help any SMB with tailored application development and complex data ingestion pipelines built for extreme performance.
                 </p>
               </div>
@@ -1498,8 +1498,8 @@
                     <path d="M2 12h20"></path>
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-300 transition-colors">Agentic AI Employees</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-white mb-2 group-hover:text-blue-300 transition-colors">Agentic AI Employees</h3>
+                <p class="text-sm text-gray-600 md:text-gray-400 leading-relaxed">
                   Create locally-hosted, offline chat agents and specialized AI employees engineered to execute secure work autonomously.
                 </p>
               </div>
@@ -1514,8 +1514,8 @@
                     <line x1="6" y1="18" x2="6.01" y2="18"></line>
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-emerald-300 transition-colors">Managed IT Strategy</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-white mb-2 group-hover:text-emerald-300 transition-colors">Managed IT Strategy</h3>
+                <p class="text-sm text-gray-600 md:text-gray-400 leading-relaxed">
                   Proactive MSP services, meticulous hardware monitoring, and expert recommendations on the best software packages.
                 </p>
               </div>
@@ -1528,8 +1528,8 @@
                     <polyline points="17 6 23 6 23 12"></polyline>
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors">Employee Training</h3>
-                <p class="text-sm text-gray-400 leading-relaxed">
+                <h3 class="text-lg font-semibold text-gray-800 md:text-white mb-2 group-hover:text-purple-300 transition-colors">Employee Training</h3>
+                <p class="text-sm text-gray-600 md:text-gray-400 leading-relaxed">
                   Comprehensive onboarding and upskilling sessions to empower your team and maximize your new technological investments.
                 </p>
               </div>
@@ -1544,8 +1544,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-amber-300 transition-colors">Technical Project Management</h3>
-                  <p class="text-sm text-gray-400 leading-relaxed">
+                  <h3 class="text-lg font-semibold text-gray-800 md:text-white mb-2 group-hover:text-amber-300 transition-colors">Technical Project Management</h3>
+                  <p class="text-sm text-gray-600 md:text-gray-400 leading-relaxed">
                     End-to-end oversight and strategic execution of complex technology deployments, ensuring your projects are delivered on time, under budget, and perfectly aligned with your business goals.
                   </p>
                 </div>
