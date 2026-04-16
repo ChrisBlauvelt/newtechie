@@ -71,9 +71,11 @@ async function captureScreenshot(browser, site) {
 }
 
 async function main() {
+  const filterArg = process.argv[2];
   const browser = await chromium.launch();
 
   for (const site of sites) {
+    if (filterArg && !site.url.includes(filterArg)) continue;
     try {
       console.log(`Capturing ${site.url}...`);
       if (site.type === 'video') {
